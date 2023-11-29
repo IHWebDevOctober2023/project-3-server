@@ -20,7 +20,7 @@ const userSchema = new Schema(
     },
     userPicture: {
       type: String,
-      default: "./images/defaultIcon.png",
+      default: "https://static.vecteezy.com/system/resources/previews/024/983/914/original/simple-user-default-icon-free-png.png",
     },
     role: {
       type: String,
@@ -28,7 +28,6 @@ const userSchema = new Schema(
     },
     age: {
       type: Number,
-      default: 0,
     },
     family: {
       type: Schema.Types.ObjectId,
