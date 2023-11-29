@@ -30,10 +30,14 @@ const userSchema = new Schema(
       type: Number,
       default: 0,
     },
-    familyName: {
-      type: String,
-      default: "",
+    family: {
+      type: Schema.Types.ObjectId,
+      ref: 'Family',
     },
+    tasksCreated: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Task',
+    }],
     tasksAssigned: {
       type: Number,
       default: 0,
