@@ -1,13 +1,16 @@
 const express = require("express");
 const router = express.Router();
-//dont forget to require the models you are trying to access!
+//
+const mongoose = require("mongoose");
+const HelpPost = require("../models/HelpPost.Model");
 
 
 
 router.get("/home", (req, res, next) => {
-  Posts.find()
+  HelpPost.find()
     .then((allPosts) => res.json(allPosts))
 });
 
 
 module.exports = router;
+
