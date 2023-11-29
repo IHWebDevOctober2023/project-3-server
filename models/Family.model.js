@@ -7,11 +7,11 @@ const familySchema = new Schema(
       required: [true, "Family Name is required."],
       unique: true,
     },
-    familyCode: {
+/*     familyCode: {
       type: String,
       required: [true, "Family Code is required"],
       unique: true,
-    },
+    }, */
     familyMembers: [{
       type: Schema.Types.ObjectId,
       ref: 'User',
