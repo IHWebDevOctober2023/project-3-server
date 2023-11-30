@@ -11,7 +11,11 @@ router.get("/family/all", (req, res, next) =>{
     })
     .catch(error => console.log(error))
 })
-
+router.post("/create", async(req, res)=>{
+    //console.log("createfamily")
+    //console.log(req.body)
+    const newFam = await Family.create(req.body)
+})
 
 module.exports = router;
 
