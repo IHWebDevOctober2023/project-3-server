@@ -37,14 +37,14 @@ const userSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: 'Task',
     }],
-    tasksAssigned: {
-      type: Number,
-      default: 0,
-    },
-    tasksDone: {
-      type: Number,
-      default: 0,
-    },
+    tasksAssigned: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Task',
+    }],
+    tasksDone: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Task',
+    }],
     kpi: {
       type: Number,
       default: 0,
