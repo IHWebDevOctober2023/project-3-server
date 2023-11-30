@@ -22,7 +22,7 @@ const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
 const familyRoutes = require("./routes/family.routes");
-app.use('/fam', familyRoutes);
+app.use('/family', familyRoutes);
 
 
 const userRoutes = require("./routes/user.routes");
