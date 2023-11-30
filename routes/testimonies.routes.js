@@ -17,19 +17,16 @@ router.get("/createtestimony", (req, res, next) => {
 
 router.post("/createtestimony", (req, res, next) => {
     const { text, rating, creator } = req.body;
-    const user = req.session
-    // const {_id} = req.payload
+    
     Testimony.create({
         text,
         rating,
-        creator
-    
-        
+        creator,
     })
     .then((createdTestimony) => {
         res.json(createdTestimony)
-        console.log(createdTestimony._id);
-        console.log("este es el req",req.session.currentUser);
+        console.log(createdTestimony);
+        console.log("este es el req",creator);
         })
         .catch((err)=>(err))
 });

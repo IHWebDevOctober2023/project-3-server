@@ -15,7 +15,8 @@ const testimonySchema = new Schema(
             required: true
         },
         creator: {
-            type: [{type: Schema.Types.ObjectId, ref: "User"}]
+            type: {
+                type: Schema.Types.ObjectId, ref: "User"},
         }
 
 
