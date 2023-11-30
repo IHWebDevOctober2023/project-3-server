@@ -3,7 +3,7 @@ const { Schema, model } = require("mongoose");
 const helpPostSchema = new Schema(
    
     {
-        username: {
+        Title: {
             type: String,
             required: true
         },
@@ -17,7 +17,6 @@ const helpPostSchema = new Schema(
         },
         helpImageUrl: {
             type: String,
-        
         },
         tokens: {
             type: String
@@ -38,16 +37,8 @@ const helpPostSchema = new Schema(
         selectedVolunteer: {
             type: {type: Schema.Types.ObjectId, ref: "User"},
             required: true
-
-        },
-        tokenId: {
-            type: ObjectId,
-            required: true
         },
         isCompleted: false,
-
-
-
     }
 );
 
