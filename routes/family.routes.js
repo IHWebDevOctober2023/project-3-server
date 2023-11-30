@@ -17,7 +17,7 @@ router.post("/create", (req, res) => {
 
     const userId = req.body.userId
 
-// Creating a random number for FamilyCode
+    // Creating a random number for FamilyCode
     function generateRandomNumber() {
         // Generate a random number between 0 and 1
         const randomFraction = Math.random();
@@ -27,15 +27,15 @@ router.post("/create", (req, res) => {
     }
 
     const newFamilyCode = generateRandomNumber()
-    Family.create({ familyCode: newFamilyCode, familyName: familyName, familyMembers: [userId]  })
+    Family.create({ familyCode: newFamilyCode, familyName: familyName, familyMembers: [userId] })
         .then((newFamilyCreated) => {
             // this return is for the access to the NewfamilyCreated to the next then
             return newFamilyCreated
         })
-        .then((newFamilyCreated)=>{
-         return User.findByIdAndUpdate(userId, {family: newFamilyCreated._id })
+        .then((newFamilyCreated) => {
+            return User.findByIdAndUpdate(userId, { family: newFamilyCreated._id })
         })
-        .then(()=>{
+        .then(() => {
             res.send("Your family has been created")
         })
 
@@ -43,17 +43,22 @@ router.post("/create", (req, res) => {
 })
 
 // Route a member to join the family
-router.post("/join", (req,res) =>{
-const familyCode = req.body.familyCode
-const userId = req.body.userId
-Family.find({familyCode})
-.then((familyFound)=>{
-    const familyId = familyFound._id
-    User.findByIdAndUpdate(userId, {family: familyId})
-    Family.findByIdAndUpdate(familyId, {$push:{familyMembers: userId}} )
+router.post("/join", (req, res) => {
+    const familyCode = req.body.familyCode
+    const userId = req.body.userId
+    Family.find({ familyCode })
+        .then((familyFound) => {
+            const familyId = familyFound[0]._id
+            return User.findByIdAndUpdate(userId, { family: familyId }, { new: true })
+        })
+        .then((updatedUser) => {
+            return Family.findByIdAndUpdate(updatedUser.family, { $push: { familyMembers: userId } })
+        })
+        .then(() => {
+            res.send("User added to the family")
+        })
+        .catch(error => console.log(error))
 })
-.catch(error => console.log(error))
-})
-    
+
 
 module.exports = router;
