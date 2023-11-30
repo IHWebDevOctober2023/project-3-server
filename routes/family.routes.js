@@ -17,7 +17,7 @@ router.post("/create", (req, res) => {
 
     const userId = req.body.userId
 
-// creating a random number for FamilyCode
+// Creating a random number for FamilyCode
     function generateRandomNumber() {
         // Generate a random number between 0 and 1
         const randomFraction = Math.random();
@@ -31,11 +31,9 @@ router.post("/create", (req, res) => {
         .then((newFamilyCreated) => {
             // this return is for the access to the NewfamilyCreated to the next then
             return newFamilyCreated
-
         })
         .then((newFamilyCreated)=>{
          return User.findByIdAndUpdate(userId, {family: newFamilyCreated._id })
-
         })
         .then(()=>{
             res.send("Your family has been created")
@@ -44,10 +42,18 @@ router.post("/create", (req, res) => {
         .catch(error => console.log(error))
 })
 
+// Route a member to join the family
+router.post("/join", (req,res) =>{
+const familyCode = req.body.familyCode
+const userId = req.body.userId
+Family.find({familyCode})
+.then((familyFound)=>{
+    const familyId = familyFound._id
+    User.findByIdAndUpdate(userId, {family: familyId})
+    Family.findByIdAndUpdate(familyId, {$push:{familyMembers: userId}} )
+})
+.catch(error => console.log(error))
+})
     
 
 module.exports = router;
-
-/* 
-This is a test
- */
