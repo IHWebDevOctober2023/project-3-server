@@ -2,7 +2,7 @@
 const { Schema, model } = require("mongoose");
 
 const testimonySchema = new Schema(
-   
+
     {
         text: {
             type: String,
@@ -10,16 +10,13 @@ const testimonySchema = new Schema(
         },
         rating: {
             type: Number,
-            min:1,
+            min: 1,
             max: 5,
             required: true
         },
         creator: {
-            type: {
-                type: Schema.Types.ObjectId, ref: "User"},
+            type: [{type: Schema.Types.ObjectId, ref: "User"}],
         }
-
-
     }
 );
 
