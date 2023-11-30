@@ -7,18 +7,18 @@ const familySchema = new Schema(
       required: [true, "Family Name is required."],
       unique: true,
     },
-/*     familyCode: {
+    familyCode: {
       type: String,
       required: [true, "Family Code is required"],
       unique: true,
-    }, */
+    },
     familyMembers: [{
       type: Schema.Types.ObjectId,
       ref: 'User',
     }],
     familyPicture: {
       type: String,
-      default: "./images/profilePictureDefault.jpg", // url
+      default: "https://www.clipartmax.com/png/middle/244-2445759_connect-and-care-seamlessly-community-icon.png", // url
     },
     tasksWeekly: {
       type: Number,
