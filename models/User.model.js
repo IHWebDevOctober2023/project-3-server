@@ -24,11 +24,11 @@ const userSchema = new Schema(
     },
     profilePicture: {
       type: String,
-      default: "default.png",
+      default: "https://static.vecteezy.com/system/resources/previews/026/619/142/original/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg",
     },
     skills: {
       type: String,
-      enum: ["Languages", "Strength", "Electronics", "Hardware"]
+      enum: ["Languages", "Tech", "Strength", "Electronics", "Softwares", "Dancing", "Active listening", "Body disciplines", "Coaching", "Humor", "Sports" ]
     },
     tokens: {
       type: Number
