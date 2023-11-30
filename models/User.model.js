@@ -28,6 +28,7 @@ const userSchema = new Schema(
     },
     age: {
       type: Number,
+      required: [true, "The age is required."],
     },
     family: {
       type: Schema.Types.ObjectId,
