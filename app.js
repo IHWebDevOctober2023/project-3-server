@@ -21,13 +21,15 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
+// Family Routes
 const familyRoutes = require("./routes/family.routes");
 app.use('/family', familyRoutes);
 
-
+// User Routes
 const userRoutes = require("./routes/user.routes");
 app.use('/', userRoutes)
 
+// Task Routes ((((((((IS A TEST))))))))
 const taskRoutes = require("./routes/task.routes")
 app.use('/family', taskRoutes)
 

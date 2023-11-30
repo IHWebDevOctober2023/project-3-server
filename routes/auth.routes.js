@@ -59,6 +59,8 @@ router.post("/signup", (req, res, next) => {
 
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then`
+
+///// CUSTOM TIP: We add the age and role
       return User.create({ email, password: hashedPassword, name, age, role });
     })
     .then((createdUser) => {
@@ -87,6 +89,7 @@ router.post("/login", (req, res, next) => {
 
   // Check the users collection if a user with the same email exists
   User.findOne({ email })
+//// CUSTOM TIP: we populate the family
     .populate("family")
     .then((foundUser) => {
       if (!foundUser) {
@@ -101,7 +104,7 @@ router.post("/login", (req, res, next) => {
       if (passwordCorrect) {
         // Deconstruct the user object to omit the password
         const { _id, email, name, family, role } = foundUser;
-
+// CUSTOM TIP: We add to the Payload JWT the family and role to check if is CHILD/PARENT and have a FAMILY to show the correct page in FrontEnd
         // Create an object that will be set as the token payload
         const payload = { _id, email, name, family, role };
 
