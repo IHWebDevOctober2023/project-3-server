@@ -14,13 +14,12 @@ const userSchema = new Schema(
       type: String,
       required: [true, "Password is required."],
     },
-    username: {
+    name: {
       type: String,
       required: [true, "Username is required."],
     },
     location: {
-      type: String,
-      
+      type: String
     },
     profilePicture: {
       type: String,
