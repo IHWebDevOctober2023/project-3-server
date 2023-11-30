@@ -21,6 +21,15 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
+const testimoniesRoutes = require("./routes/testimonies.routes");
+app.use("/testimonies", testimoniesRoutes);
+
+const userRoutes = require("./routes/user.routes");
+app.use("/user", userRoutes);
+
+const helpPostRoutes = require("./routes/help-posts.routes");
+app.use("/help-post", helpPostRoutes);
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
