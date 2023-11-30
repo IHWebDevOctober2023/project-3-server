@@ -1,21 +1,14 @@
 const { Schema, model } = require("mongoose");
 
-const validateEmail = (v) => {
-  return /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(v);
-  message: props => `${props.value} is not a valid email address!`
-}
-
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
 const userSchema = new Schema(
   {
     email: {
       type: String,
       required: [true, "Email is required."],
-      unique: true,
+      unique: [true, "Email already exists in our database."],
       lowercase: true,
       trim: true,
-      validate: [validateEmail, "Please use a valid email address"],
-      match: [/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(v), "Please use a valid email address"]
+      validate: {validator: (v) => {return /[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i.test(v);},message: props => `${props.value} is not a valid email address!`}
     },
     password: {
       type: String,
@@ -46,7 +39,6 @@ const userSchema = new Schema(
 
   },
   {
-    // this second object adds extra properties: `createdAt` and `updatedAt`
     timestamps: true,
   }
 );
