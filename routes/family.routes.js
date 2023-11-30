@@ -34,9 +34,10 @@ router.post("/create", (req, res) => {
         })
         .then((newFamilyCreated) => {
             return User.findByIdAndUpdate(userId, { family: newFamilyCreated._id })
+                .then(() => newFamilyCreated)
         })
-        .then(() => {
-            res.send("Your family has been created")
+        .then((newFamilyCreated) => {
+            res.json(newFamilyCreated)
         })
 
         .catch(error => console.log(error))
@@ -54,8 +55,8 @@ router.post("/join", (req, res) => {
         .then((updatedUser) => {
             return Family.findByIdAndUpdate(updatedUser.family, { $push: { familyMembers: userId } })
         })
-        .then(() => {
-            res.send("User added to the family")
+        .then((familyUpdated) => {
+            res.json(familyUpdated)
         })
         .catch(error => console.log(error))
 })
