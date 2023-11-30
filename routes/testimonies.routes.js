@@ -11,8 +11,12 @@ router.get("/landing", (req, res, next) => {
 });
 
 router.get("/createtestimony", (req, res, next) => {
-    Testimony.find().slice(4, 0)
-        .then((allTestimonies) => res.json(allTestimonies))
+    Testimony.find()
+    .then((alltestimonies) => {
+        console.log("Alltestimonies: ", alltestimonies);
+    
+    })/* slice(4, 0)
+        .then((allTestimonies) => res.json(allTestimonies)) */
 });
 
 router.post("/createtestimony", (req, res, next) => {
