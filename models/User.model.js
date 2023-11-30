@@ -35,7 +35,7 @@ const userSchema = new Schema(
     },
     skills: {
       type: String,
-      enum: ["Languages", "Strength", "Electronics", "Softwares", "Dancing", "Active listening", "Meditation", "Coaching", "Humor", "Sports" ]
+      enum: ["Languages", "Tech", "Strength", "Electronics", "Softwares", "Dancing", "Active listening", "Body disciplines", "Coaching", "Humor", "Sports" ]
     },
     tokens: {
       type: Number
