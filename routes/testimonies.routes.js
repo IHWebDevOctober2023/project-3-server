@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 //
 const mongoose = require("mongoose");
-const Testimony = require("../models/Testimony.Model");
+const Testimony = require("../models/Testimony.model");
 
 // /testimonies/landing
 router.get("/landing", (req, res, next) => {

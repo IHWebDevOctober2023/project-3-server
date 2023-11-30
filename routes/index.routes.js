@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 //
 const mongoose = require("mongoose");
-const HelpPost = require("../models/HelpPost.Model");
+const HelpPost = require("../models/HelpPost.model");
 
 
 

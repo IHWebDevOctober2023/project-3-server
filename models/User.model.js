@@ -30,10 +30,14 @@ const userSchema = new Schema(
       enum: ["Languages", "Tech", "Strength", "Electronics", "Softwares", "Dancing", "Active listening", "Body disciplines", "Coaching", "Humor", "Sports" ]
     },
     tokens: {
-      type: Number
+      type: Number,
+      default: 3,
     },
     testimonies: {
       type: [{ type: Schema.Types.ObjectId, ref: "Testimony" }]
+    },
+    helpPosts: {
+      type: [{ type: Schema.Types.ObjectId, ref: "HelpPost" }]
     }
 
   },
