@@ -2,10 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const taskSchema = new Schema(
   {
-    taskFamily: {
+    taskFamily: [{
       type: Schema.Types.ObjectId,
       ref: 'Family',
-    },
+    }],
     taskOwner: {
       type: Schema.Types.ObjectId,
       ref: 'User',
@@ -13,6 +13,10 @@ const taskSchema = new Schema(
     taskIcon: {
       type: String,
       required: [true, "Choose an icon for the task"],
+    },
+    taskName: {
+      type: String,
+      required: [true, "Task Name is required."],
     },
     taskDescription: {
       type: String,

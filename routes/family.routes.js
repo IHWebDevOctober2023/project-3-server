@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 
-// requires the model for Family
+// INIT: Requires the model for Family
 const Family = require("../models/Family.model");
 const User = require("../models/User.model");
 router.get("/family/all", (req, res, next) => {
@@ -12,24 +12,25 @@ router.get("/family/all", (req, res, next) => {
         })
         .catch(error => console.log(error))
 })
+
+// STEP 1 -  Creating a new Family
 router.post("/create", (req, res) => {
     const familyName = req.body.familyName
-
     const userId = req.body.userId
 
-    // Creating a random number for FamilyCode
+    // Creating a random number for get a FamilyCode
     function generateRandomNumber() {
-        // Generate a random number between 0 and 1
+        // Step 1 - Generate a random number between 0 and 1
         const randomFraction = Math.random();
-        // Scale the random fraction to fit the range [100000, 999999]
+        // Step 2 - Scale the random fraction to fit the range [100000, 999999]
         const randomNumberInRange = Math.floor(randomFraction * (999999 - 100000 + 1)) + 100000;
         return randomNumberInRange;
     }
-
+// STEP 1.1 - After create the family, you are the first member
     const newFamilyCode = generateRandomNumber()
     Family.create({ familyCode: newFamilyCode, familyName: familyName, familyMembers: [userId] })
         .then((newFamilyCreated) => {
-            // this return is for the access to the NewfamilyCreated to the next then
+            // This return is required for the next then step
             return newFamilyCreated
         })
         .then((newFamilyCreated) => {
@@ -39,16 +40,16 @@ router.post("/create", (req, res) => {
         .then((newFamilyCreated) => {
             res.json(newFamilyCreated)
         })
-
         .catch(error => console.log(error))
 })
 
-// Route a member to join the family
+// STEP 2 - Creating a Route a NEW MEMBER to join the family typing the FAMILY CODE
 router.post("/join", (req, res) => {
     const familyCode = req.body.familyCode
     const userId = req.body.userId
     Family.find({ familyCode })
         .then((familyFound) => {
+            // Warning: The Find Method always returns and ARRAY!
             const familyId = familyFound[0]._id
             return User.findByIdAndUpdate(userId, { family: familyId }, { new: true })
         })
@@ -61,5 +62,12 @@ router.post("/join", (req, res) => {
         .catch(error => console.log(error))
 })
 
+
+// Creating a new Task
+
+router.post("/createtask", (req,res) =>{
+    const task = req.body.task
+    res.json(task)
+})
 
 module.exports = router;

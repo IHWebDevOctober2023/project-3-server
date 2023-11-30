@@ -1,13 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-// requires the model  User
+// INIT: Requires the model for User
 const User = require("../models/User.model")
-router.get('/alluser', (req, res, next) =>{
+router.get('/allusers', (req, res, next) =>{
     User.find()
-    .then((allUser) =>{
-        console.log(allUser)
-        res.json(allUser)
+    .then((allUsers) =>{
+        console.log(allUsers)
+        res.json(allUsers)
     })
 })
 
