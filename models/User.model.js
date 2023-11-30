@@ -20,7 +20,7 @@ const userSchema = new Schema(
     },
     location: {
       type: String,
-      required: true
+      
     },
     profilePicture: {
       type: String,
