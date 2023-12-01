@@ -71,3 +71,14 @@ router.post("/createtask", (req,res) =>{
 })
 
 module.exports = router;
+
+// Creating a route to populate de family members
+
+router.get("/familymembers/:_id", (req, res)=>{
+const familyId= req.params._id
+Family.findById(familyId)
+.populate("familyMembers")
+.then ((familyFound)=>{
+    res.json(familyFound.familyMembers)
+})
+})
