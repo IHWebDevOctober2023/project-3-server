@@ -7,9 +7,9 @@ const Testimony = require("../models/Testimony.Model");
 // /testimonies/landing
 router.get("/landing", (req, res, next) => {
     Testimony.find()
+        .populate("creator", "name profilePicture")
         .then((allTestimonies) => res.send(allTestimonies.slice(0, 4)))
         .catch((err) => console.error(err));
-        //.then((allTestimonies) => res.json(allTestimonies))
 });
 
 // CONFIRM THE BELLOW ROUTE CODE IS CORRECT 
