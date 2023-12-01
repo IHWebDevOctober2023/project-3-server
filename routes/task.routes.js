@@ -6,7 +6,7 @@ const router = express.Router();
 // requires the model for Task, Family and User
 const Task = require("../models/Task.model");
 
-router.get('/task', (req, res, next)=>{
+router.get('/task', (req, res)=>{
     Task.find()
     .then((allTask) =>{
         res.json(allTask)
@@ -16,3 +16,5 @@ router.get('/task', (req, res, next)=>{
 })
 
 module.exports = router;
+
+    
