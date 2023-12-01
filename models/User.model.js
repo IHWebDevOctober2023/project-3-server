@@ -29,6 +29,10 @@ const userSchema = new Schema(
       type: String,
       enum: ["Languages", "Tech", "Strength", "Electronics", "Softwares", "Dancing", "Active listening", "Body disciplines", "Coaching", "Humor", "Sports" ]
     },
+    description: {
+      type: String,
+      default: "Your description here!",
+    },
     tokens: {
       type: Number,
       default: 3,
