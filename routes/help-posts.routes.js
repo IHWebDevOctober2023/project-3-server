@@ -8,8 +8,9 @@ const HelpPost = require("../models/HelpPost.model");
 }); */
 
 router.post("/createhelp", (req, res, next) => {
+   
     const { title, location, description, helpImageUrl, creator, category} = req.body;
-    
+    console.log("reqbody", req.body);
     HelpPost.create({
         title,
         location,
@@ -19,10 +20,10 @@ router.post("/createhelp", (req, res, next) => {
         category,
         
     })
-    .then((createdTestimony) => {
-        res.json(createdTestimony)
-        console.log(createdTestimony);
-        console.log("este es el req",creator);
+    .then((createdHelp) => {
+        res.json(createdHelp)
+        console.log(createdHelp);
+        console.log("este es el req",createdHelp);
         })
         .catch((err)=>(err))
 });

@@ -19,7 +19,7 @@ const helpPostSchema = new Schema(
             type: String,
         },
         creator: {
-            type: {type: Schema.Types.ObjectId, ref: "User"},
+            type: [{type: Schema.Types.ObjectId, ref: "User"}],
         },
         category: {
             type: String,

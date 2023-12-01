@@ -23,7 +23,7 @@ const userSchema = new Schema(
     },
     profilePicture: {
       type: String,
-      default: "https://static.vecteezy.com/system/resources/previews/026/619/142/original/default-avatar-profile-icon-of-social-media-user-photo-image-vector.jpg",
+      default: "/images/icon_person_.png"
     },
     skills: {
       type: String,
