@@ -28,6 +28,8 @@ app.use('/family', familyRoutes);
 // User Routes
 const userRoutes = require("./routes/user.routes");
 app.use('/', userRoutes)
+/* app.use('/api', userRoutes); // <== API Cloudinary upload images */
+
 
 // Task Routes ((((((((IS A TEST))))))))
 const taskRoutes = require("./routes/task.routes")
