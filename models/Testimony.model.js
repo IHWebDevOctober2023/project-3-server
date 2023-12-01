@@ -16,9 +16,7 @@ const testimonySchema = new Schema(
             max: 5,
             required: true
         },
-        creator: {
-            type: [{type: Schema.Types.ObjectId, ref: "User"}],
-        }
+        creator: {type: Schema.Types.ObjectId, ref: "User" }
     }
 );
 
