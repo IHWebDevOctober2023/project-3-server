@@ -12,6 +12,7 @@ const User = require("../models/User.model");
 
 // Require necessary (isAuthenticated) middleware in order to control access to specific routes
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
+const Task = require("../models/Task.model.js");
 
 // How many rounds should bcrypt run the salt (default - 10 rounds)
 const saltRounds = 10;
@@ -132,5 +133,20 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
   // Send back the token payload object containing the user data
   res.status(200).json(req.payload);
 });
+
+//router for populate family with the task
+router.post('/createtask', (req, res) => {
+ // const {taskWeekDay, taskDescription, taskTime} = req.body
+  console.log(req.body);
+  User.find({familyName})
+  console.log("taskAssingTo")
+    .populate('task')
+    .then(() => {
+      res.json({ message: "task has been created" })
+    })
+    .catch((error) => console.log(error))
+    console.log("task: ", Task);
+})
+
 
 module.exports = router;

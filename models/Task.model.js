@@ -12,11 +12,11 @@ const taskSchema = new Schema(
     },
     taskIcon: {
       type: String,
-      required: [true, "Choose an icon for the task"],
+      required: [false, "Choose an icon for the task"],
     },
     taskName: {
       type: String,
-      required: [true, "Task Name is required."],
+      required: [false, "Task Name is required."],
     },
     taskDescription: {
       type: String,
@@ -54,7 +54,7 @@ const taskSchema = new Schema(
     taskAssignedTo: {
       type: Schema.Types.ObjectId,
       ref: 'User',
-      required: [true, "Choose a family member"],
+      required: [false, "Choose a family member"],
     },
     taskIsDone: {
       type: Boolean,
