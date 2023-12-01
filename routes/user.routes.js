@@ -18,16 +18,19 @@ router.get('/allusers', (req, res, next) =>{
 
 // POST "/uploaduserpicture" => Route that receives the image, sends it to Cloudinary via the fileUploader and returns the image URL
 router.post("/uploaduserpicture", fileUploader.single("userPicture"), (req, res, next) => {
-    // console.log("file is: ", req.file)
-   
-    if (!req.file) {
-      next(new Error("No file uploaded!"));
-      return;
-    }
-    
-    // Get the URL of the uploaded file and send it as a response.
-    // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
-    
+  
+  if (!req.file) {
+    next(new Error("No file uploaded!"));
+    return;
+  }
+  
+  // Get the URL of the uploaded file and send it as a response.
+  // 'fileUrl' can be any name, just make sure you remember to use the same when accessing it on the frontend
+// we have to set the new picture uploaded to the backend.
+  const userId = req.body.userId
+  User.findByIdAndUpdate(userId, {userPicture: req.file.path })
+  console.log("file is: ", req.file.path)
+
     res.json({ fileUrl: req.file.path });
   });
 

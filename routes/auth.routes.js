@@ -104,10 +104,10 @@ router.post("/login", (req, res, next) => {
 
       if (passwordCorrect) {
         // Deconstruct the user object to omit the password
-        const { _id, email, name, family, role } = foundUser;
+        const { _id, email, name, family, userPicture, role } = foundUser;
 // CUSTOM TIP: We add to the Payload JWT the family and role to check if is CHILD/PARENT and have a FAMILY to show the correct page in FrontEnd
         // Create an object that will be set as the token payload
-        const payload = { _id, email, name, family, role };
+        const payload = { _id, email, name, family, userPicture, role };
 
         // Create a JSON Web Token and sign it
         const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
