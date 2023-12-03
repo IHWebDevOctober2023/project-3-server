@@ -2,10 +2,19 @@ const express = require("express");
 const router = express.Router();
 const HelpPost = require("../models/HelpPost.model");
 
-/* router.get("/createtehelp", (req, res, next) => {
-    HelpPost.find()
-        .then((allHelpPosts) => res.json(allHelpPosts))
-}); */
+router.get("/:helpId", (req, res, next) => {
+
+    const {helpId} = req.params
+
+    HelpPost.findById(helpId)
+    
+        .populate("creator")
+        .then((helpPost) => {
+            const {title, volunteers, description,location,category, creator } = helpPost
+            res.send({title, volunteers, description,location,category, creator})
+        })
+        .catch((err)=>("couldn't find help post", err))
+});
 
 router.post("/createhelp", (req, res, next) => {
    

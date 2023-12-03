@@ -27,7 +27,7 @@ const userSchema = new Schema(
     },
     skills: {
       type: String,
-      enum: ["Languages", "Tech", "Strength", "Electronics", "Softwares", "Dancing", "Active listening", "Body disciplines", "Coaching", "Humor", "Sports" ]
+      enum: ["Languages", "Tech", "Strength", "Electronics", "Softwares", "Dancing", "Active listening", "Body disciplines", "Coaching", "Humor", "Sports"]
     },
     description: {
       type: String,
