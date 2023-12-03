@@ -3,9 +3,16 @@ const router = express.Router();
 const HelpPost = require("../models/HelpPost.model");
 
 router.get("/:helpId", (req, res, next) => {
+
     const {helpId} = req.params
+
     HelpPost.findById(helpId)
-        .then((allHelpPosts) => res.json(allHelpPosts))
+    
+        .populate("creator")
+        .then((helpPost) => {
+            const {title, volunteers, description,location,category, creator } = helpPost
+            res.send({title, volunteers, description,location,category, creator})
+        })
         .catch((err)=>("couldn't find help post", err))
 });
 
