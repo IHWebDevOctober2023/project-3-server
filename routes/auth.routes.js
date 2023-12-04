@@ -12,13 +12,15 @@ const User = require("../models/User.model");
 
 // Require necessary (isAuthenticated) middleware in order to control access to specific routes
 const { isAuthenticated } = require("../middleware/jwt.middleware.js");
+const Task = require("../models/Task.model.js");
 
 // How many rounds should bcrypt run the salt (default - 10 rounds)
 const saltRounds = 10;
 
 // POST /auth/signup  - Creates a new user in the database
 router.post("/signup", (req, res, next) => {
-  const { email, password, name } = req.body;
+  const { email, password, name, age, role } = req.body;
+  console.log(req.body);
 
   // Check if email or password or name are provided as empty strings
   if (email === "" || password === "" || name === "") {
@@ -58,7 +60,9 @@ router.post("/signup", (req, res, next) => {
 
       // Create the new user in the database
       // We return a pending promise, which allows us to chain another `then`
-      return User.create({ email, password: hashedPassword, name });
+
+///// CUSTOM TIP: We add the age and role
+      return User.create({ email, password: hashedPassword, name, age, role });
     })
     .then((createdUser) => {
       // Deconstruct the newly created user object to omit the password
@@ -86,6 +90,8 @@ router.post("/login", (req, res, next) => {
 
   // Check the users collection if a user with the same email exists
   User.findOne({ email })
+//// CUSTOM TIP: we populate the family
+    .populate("family")
     .then((foundUser) => {
       if (!foundUser) {
         // If the user is not found, send an error response
@@ -98,10 +104,10 @@ router.post("/login", (req, res, next) => {
 
       if (passwordCorrect) {
         // Deconstruct the user object to omit the password
-        const { _id, email, name } = foundUser;
-
+        const { _id, email, name, family, userPicture, role } = foundUser;
+// CUSTOM TIP: We add to the Payload JWT the family and role to check if is CHILD/PARENT and have a FAMILY to show the correct page in FrontEnd
         // Create an object that will be set as the token payload
-        const payload = { _id, email, name };
+        const payload = { _id, email, name, family, userPicture, role };
 
         // Create a JSON Web Token and sign it
         const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
@@ -127,5 +133,20 @@ router.get("/verify", isAuthenticated, (req, res, next) => {
   // Send back the token payload object containing the user data
   res.status(200).json(req.payload);
 });
+
+//router for populate family with the task
+router.post('/createtask', (req, res) => {
+ // const {taskWeekDay, taskDescription, taskTime} = req.body
+  console.log(req.body);
+  User.find({familyName})
+  console.log("taskAssingTo")
+    .populate('task')
+    .then(() => {
+      res.json({ message: "task has been created" })
+    })
+    .catch((error) => console.log(error))
+    console.log("task: ", Task);
+})
+
 
 module.exports = router;

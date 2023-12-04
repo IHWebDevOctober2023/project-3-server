@@ -21,6 +21,21 @@ app.use("/api", indexRoutes);
 const authRoutes = require("./routes/auth.routes");
 app.use("/auth", authRoutes);
 
+// Family Routes
+const familyRoutes = require("./routes/family.routes");
+app.use('/family', familyRoutes);
+
+// User Routes
+const userRoutes = require("./routes/user.routes");
+app.use('/', userRoutes)
+/* app.use('/api', userRoutes); // <== API Cloudinary upload images */
+
+
+// Task Routes ((((((((IS A TEST))))))))
+const taskRoutes = require("./routes/task.routes")
+app.use('/family', taskRoutes)
+
+
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require("./error-handling")(app);
 
