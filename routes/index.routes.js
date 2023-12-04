@@ -1,8 +1,16 @@
 const express = require("express");
 const router = express.Router();
+//
+const mongoose = require("mongoose");
+const HelpPost = require("../models/HelpPost.model");
 
-router.get("/", (req, res, next) => {
-  res.json("All good in here");
+
+
+router.get("/home", (req, res, next) => {
+  HelpPost.find()
+    .then((allPosts) => res.json(allPosts))
 });
 
+
 module.exports = router;
+
