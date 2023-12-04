@@ -49,5 +49,10 @@ router.get("/tasks/:_id/:dayName", (req, res, next) => {
     })
     .catch((error) => console.log(error))
 })
-
+router.delete("/deletetask/:_id", (req, res, next) =>{
+  const taskId = req.params.taskId
+  Task.findByIdAndDelete(taskId)
+console.log("find:", Task);
+  res.json("deletetask")
+})
 module.exports = router;
