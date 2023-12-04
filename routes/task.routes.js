@@ -50,4 +50,56 @@ router.get("/tasks/:_id/:dayName", (req, res, next) => {
     .catch((error) => console.log(error))
 })
 
+///////////////////// MANAGING FAMILY PERFORMANCE ////////////////////
+// CREATING a route to calculate TASKS by Family
+ router.get("/tasks/:_id/:tasksByFamily", (req, res, next) => {
+  const familyId = req.params._id
+  Task.find({ taskFamily: familyId})
+    .then((TasksbyFamily) => {
+      res.json(TasksbyFamily)
+    })
+    .catch((error) => console.log(error))
+})
+// CREATING a route to calculate all the Tasks DONE by Family
+router.get("/tasks/:_id/:tasksDoneByFamily", (req, res, next) => {
+  const familyId = req.params._id
+  Task.find({ taskFamily: familyId, taskIsDone: true })
+    .then((TasksDonebyFamily) => {
+      res.json(TasksDonebyFamily)
+    })
+    .catch((error) => console.log(error))
+})
+// CREATING a route to calculate all the Tasks PENDING by Family
+router.get("/tasks/:_id/:tasksPendingByFamily", (req, res, next) => {
+  const familyId = req.params._id
+  Task.find({ taskFamily: familyId, taskIsDone: true })
+    .then((TasksPendingbyFamily) => {
+      res.json(TasksPendingbyFamily)
+    })
+    .catch((error) => console.log(error))
+})
+
+////////////////////// MANAGING USER PERFORMANCE ////////////////////////
+// CREATING a route to calculate all the Tasks DONE by User
+router.get("/tasks/:_id/:tasksDoneByUserDone", (req, res, next) => {
+  const familyId = req.params._id
+  Task.find({ taskAssignedTo: familyId, taskIsDone: true })
+    .then((TasksDonebyUser) => {
+      res.json(TasksDonebyUser)
+    })
+    .catch((error) => console.log(error))
+})
+// CREATING a route to calculate all the Tasks PENDING by User
+router.get("/tasks/:_id/:tasksPendingByUserDone", (req, res, next) => {
+  const familyId = req.params._id
+  Task.find({ taskAssignedTo: familyId, taskIsDone: false })
+    .then((TasksDonebyUser) => {
+      res.json(TasksDonebyUser)
+    })
+    .catch((error) => console.log(error))
+})
+
+
+
+
 module.exports = router;
