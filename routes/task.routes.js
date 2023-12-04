@@ -12,8 +12,8 @@ router.post('/task', (req, res, next) => {
     taskDescription,
     taskTime,
     taskWeekDay,
-    taskFamily
-  
+    taskFamily,
+
   } = req.body;
 
   // Create a new task
@@ -25,21 +25,27 @@ router.post('/task', (req, res, next) => {
     taskFamily
   })
 
-  .then((newTask) => {
-    // Send the newly created task as a JSON response
-    res.json(newTask);
-  })
-  .catch((error) => {
-    console.error(error);
-    // Send an error response if there's an issue creating the task
-  });
+    .then((newTask) => {
+      // Send the newly created task as a JSON response
+      res.json(newTask);
+    })
+    .catch((error) => {
+      console.error(error);
+      // Send an error response if there's an issue creating the task
+    });
 });
 
-router.get("/tasks/:_id", (req, res, next) =>{
-  const familyId= req.params._id  
-  Task.find({taskFamily:familyId})
+router.get("/tasks/:_id/:dayName", (req, res, next) => {
+  const dayName = req.params.dayName
+  const currentDate = new Date();
+  console.log(currentDate);
+ // const dayOfWeek = currentDate.getDay();
+  //const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+  //const dayName = daysOfWeek[dayOfWeek];
+  const familyId = req.params._id
+  Task.find({ taskFamily: familyId, taskWeekDay: dayName})
     .then((tasks) => {
-        res.json(tasks)
+      res.json(tasks)
     })
     .catch((error) => console.log(error))
 })
