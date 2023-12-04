@@ -18,7 +18,7 @@ const familySchema = new Schema(
     }],
     familyPicture: {
       type: String,
-      default: "https://www.clipartmax.com/png/middle/244-2445759_connect-and-care-seamlessly-community-icon.png", // url
+      default: "https://www.inclusivechoices.com.au/wp-content/uploads/2022/08/thumb-print-sml2.png", // url
     },
     tasksWeekly: {
       type: Number,
