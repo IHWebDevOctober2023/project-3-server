@@ -52,10 +52,14 @@ const taskSchema = new Schema(
       ],
     },
     taskAssignedTo: {
-      type: Schema.Types.ObjectId,
-      ref: 'User',
-      required: [false, "Choose a family member"],
+     type: String,
+     required: [false, "Choose a family member"],
     },
+    //taskAssignedTo: {
+    //  type: Schema.Types.ObjectId,
+     // ref: 'User',
+    //  required: [false, "Choose a family member"],
+   // },
     taskIsDone: {
       type: Boolean,
       default: false,

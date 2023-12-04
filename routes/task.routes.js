@@ -7,6 +7,7 @@ const Task = require("../models/Task.model");
 router.post('/task', (req, res, next) => {
   // Extract task data from the request body
   const {
+    taskAssignedTo,
     taskDescription,
     taskTime,
     taskWeekDay,
@@ -18,6 +19,7 @@ router.post('/task', (req, res, next) => {
     taskDescription,
     taskTime,
     taskWeekDay,
+    taskAssignedTo,
   })
 
   .then((newTask) => {
