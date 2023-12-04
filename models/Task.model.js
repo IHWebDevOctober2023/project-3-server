@@ -2,10 +2,10 @@ const { Schema, model } = require("mongoose");
 
 const taskSchema = new Schema(
   {
-    taskFamily: [{
+    taskFamily: {
       type: Schema.Types.ObjectId,
       ref: 'Family',
-    }],
+    },
     taskOwner: {
       type: Schema.Types.ObjectId,
       ref: 'User',

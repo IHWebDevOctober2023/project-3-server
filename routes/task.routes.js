@@ -3,6 +3,7 @@
 const express = require("express");
 const router = express.Router();
 const Task = require("../models/Task.model");
+const Family = require("../models/Family.model")
 
 router.post('/task', (req, res, next) => {
   // Extract task data from the request body
@@ -11,6 +12,7 @@ router.post('/task', (req, res, next) => {
     taskDescription,
     taskTime,
     taskWeekDay,
+    taskFamily
   
   } = req.body;
 
@@ -20,6 +22,7 @@ router.post('/task', (req, res, next) => {
     taskTime,
     taskWeekDay,
     taskAssignedTo,
+    taskFamily
   })
 
   .then((newTask) => {
@@ -32,15 +35,13 @@ router.post('/task', (req, res, next) => {
   });
 });
 
-router.get('/tasks', (req, res, next) =>{
-    Task.find()
+router.get("/tasks/:_id", (req, res, next) =>{
+  const familyId= req.params._id  
+  Task.find({taskFamily:familyId})
     .then((tasks) => {
-
         res.json(tasks)
     })
     .catch((error) => console.log(error))
 })
 
 module.exports = router;
-
-    
