@@ -126,3 +126,5 @@ router.get("/tasks/:_id/:tasksPendingByUserDone", (req, res, next) => {
     .catch((error) => console.log(error))
 })
  */
+
+module.exports = router;
