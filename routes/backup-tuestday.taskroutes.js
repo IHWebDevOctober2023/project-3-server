@@ -13,7 +13,6 @@ router.post('/task', (req, res, next) => {
     taskTime,
     taskWeekDay,
     taskFamily,
-    taskIsDone
 
   } = req.body;
 
@@ -23,8 +22,7 @@ router.post('/task', (req, res, next) => {
     taskTime,
     taskWeekDay,
     taskAssignedTo,
-    taskFamily,
-    taskIsDone
+    taskFamily
   })
     .then((newTask) => {
       // Send the newly created task as a JSON response
@@ -81,26 +79,10 @@ router.get("/tasks/:_id/:dayName", (req, res, next) => {
     })
     .catch((error) => console.log(error))
 })
-router.delete("/deletetask/:_id", (req, res) =>{
-  const taskId = req.params._id
-  Task.findByIdAndDelete(taskId)
-.then((taskDeleted) =>{
-  res.json("deletetask")
-})
-.catch((error) => console.log(error))
-})
 
 
-router.post("/taskisdone/:_id", (req, res) =>{
-  const taskIsDone = req.body.taskIsDone;
-  console.log("TASK IS DONE:",taskIsDone);
-  Task.findByIdAndUpdate(req.params._id, {taskIsDone})
-  .then((taskIsDone) =>{
-    res.json("taskisdone")
 
-  })
-  .catch((error) => console.log(error))
-})
+
 module.exports = router;
 
 
@@ -144,3 +126,5 @@ router.get("/tasks/:_id/:tasksPendingByUserDone", (req, res, next) => {
     .catch((error) => console.log(error))
 })
  */
+
+module.exports = router;
