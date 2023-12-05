@@ -24,7 +24,6 @@ router.post('/task', (req, res, next) => {
     taskAssignedTo,
     taskFamily
   })
-
     .then((newTask) => {
       // Send the newly created task as a JSON response
       res.json(newTask);
@@ -73,12 +72,14 @@ router.get("/tasks/:_id/:dayName", (req, res, next) => {
   //const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   //const dayName = daysOfWeek[dayOfWeek];
   const familyId = req.params._id
-  Task.find({ taskFamily: familyId, taskWeekDay: dayName })
+  Task.find({ taskFamily: familyId, taskWeekDay: dayName  })
+    .populate("taskAssignedTo")
     .then((tasks) => {
       res.json(tasks)
     })
     .catch((error) => console.log(error))
 })
+
 
 
 
