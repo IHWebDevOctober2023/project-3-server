@@ -53,100 +53,60 @@ router.post("/signup", (req, res, next) => {
         res.status(400).json({ message: "User already exists." });
         return;
       }
-
-      // If email is unique, proceed to hash the password
       const salt = bcrypt.genSaltSync(saltRounds);
       const hashedPassword = bcrypt.hashSync(password, salt);
-
-      // Create the new user in the database
-      // We return a pending promise, which allows us to chain another `then`
-
-///// CUSTOM TIP: We add the age and role
       return User.create({ email, password: hashedPassword, name, age, role });
     })
     .then((createdUser) => {
-      // Deconstruct the newly created user object to omit the password
-      // We should never expose passwords publicly
       const { email, name, _id } = createdUser;
-
-      // Create a new object that doesn't expose the password
       const user = { email, name, _id };
-
-      // Send a json response containing the user object
       res.status(201).json({ user: user });
     })
-    .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
+    .catch((err) => next(err));
 });
-
-// POST  /auth/login - Verifies email and password and returns a JWT
 router.post("/login", (req, res, next) => {
   const { email, password } = req.body;
-
-  // Check if email or password are provided as empty string
   if (email === "" || password === "") {
     res.status(400).json({ message: "Provide email and password." });
     return;
   }
-
-  // Check the users collection if a user with the same email exists
   User.findOne({ email })
-//// CUSTOM TIP: we populate the family
     .populate("family")
     .then((foundUser) => {
       if (!foundUser) {
-        // If the user is not found, send an error response
         res.status(401).json({ message: "User not found." });
         return;
       }
-
-      // Compare the provided password with the one saved in the database
       const passwordCorrect = bcrypt.compareSync(password, foundUser.password);
 
       if (passwordCorrect) {
-        // Deconstruct the user object to omit the password
         const { _id, email, name, family, userPicture, role } = foundUser;
-// CUSTOM TIP: We add to the Payload JWT the family and role to check if is CHILD/PARENT and have a FAMILY to show the correct page in FrontEnd
-        // Create an object that will be set as the token payload
         const payload = { _id, email, name, family, userPicture, role };
-
-        // Create a JSON Web Token and sign it
         const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
           algorithm: "HS256",
           expiresIn: "6h",
         });
-
-        // Send the token as the response
         res.status(200).json({ authToken: authToken });
       } else {
         res.status(401).json({ message: "Unable to authenticate the user" });
       }
     })
-    .catch((err) => next(err)); // In this case, we send error handling to the error handling middleware.
+    .catch((err) => next(err));
 });
-
-// GET  /auth/verify  -  Used to verify JWT stored on the client
 router.get("/verify", isAuthenticated, (req, res, next) => {
-  // If JWT token is valid the payload gets decoded by the
-  // isAuthenticated middleware and is made available on `req.payload`
   console.log(`req.payload`, req.payload);
-
-  // Send back the token payload object containing the user data
   res.status(200).json(req.payload);
 });
-
-//router for populate family with the task
-router.post('/createtask', (req, res) => {
- // const {taskWeekDay, taskDescription, taskTime} = req.body
+router.post("/createtask", (req, res) => {
   console.log(req.body);
-  User.find({familyName})
-  console.log("taskAssingTo")
-    .populate('task')
+  User.find({ familyName });
+  console
+    .log("taskAssingTo")
+    .populate("task")
     .then(() => {
-      res.json({ message: "task has been created" })
+      res.json({ message: "task has been created" });
     })
-    .catch((error) => console.log(error))
-    console.log("task: ", Task);
-})
-
-
+    .catch((error) => console.log(error));
+  console.log("task: ", Task);
+});
 module.exports = router;

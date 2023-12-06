@@ -51,10 +51,6 @@ const taskSchema = new Schema(
         "Sunday",
       ],
     },
-    //taskAssignedTo: {
-     //type: String,
-     //required: [false, "Choose a family member"],
-    //},
     taskAssignedTo: {
      type: Schema.Types.ObjectId,
       ref: 'User',
